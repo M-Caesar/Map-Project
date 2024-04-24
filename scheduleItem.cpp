@@ -82,8 +82,8 @@ void schedule::initSchedule(ifstream& datafile)
 	while (getline(datafile, input))
 	{
 		//getline(datafile, subject);
-		for (int i = 0; i < 8; i++)
-			datafile.ignore();
+		//for (int i = 0; i < 8; i++)
+			//datafile.ignore();
 
 		datafile >> subject >> catalog >> section >> session >> units >> totEnrl >> capEnrl >> instructor;
 
