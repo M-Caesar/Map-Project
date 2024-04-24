@@ -50,15 +50,85 @@ void scheduleItem::print()
 }
 
 //will implement operator overloads later
-bool scheduleItem::operator==(scheduleItem item)
+bool scheduleItem::operator==(string item)
+{
+	return (key == item);
+}
+bool scheduleItem::operator!=(string item)
+{
+	return !(key == item);
+}
+bool scheduleItem::operator>=(string item)
+{
+	return (key >= item);
+}
+
+void schedule::initSchedule(ifstream& datafile)
+{
+	string header;
+	string input;
+	getline(datafile, header);
+
+	string subject;
+	int catalog;
+	string section;
+	string component;
+	string session;
+	int units;
+	int totEnrl;
+	int capEnrl;
+	string instructor;
+
+	while (getline(datafile, input))
+	{
+		//getline(datafile, subject);
+		datafile >> subject >> catalog >> section >> session >> units >> totEnrl >> capEnrl >> instructor;
+
+		scheduleItem newItem(subject, catalog, section, component, session, units, totEnrl, capEnrl, instructor);
+		addEntry(newItem);
+	}
+}
+
+void schedule::addEntry(scheduleItem addItem)
+{
+	string key = addItem.getSubject() + "_" + to_string(addItem.getCatalog()) + "_" + addItem.getSection();
+	sMap.insert(pair<string,scheduleItem>(key,addItem));
+}
+
+void schedule::print()
 {
 
 }
-bool scheduleItem::operator!=(scheduleItem item)
+
+void schedule::printHeader()
 {
 
 }
-bool scheduleItem::operator>=(scheduleItem item)
-{
 
+void schedule::findSubject(string sub)
+{
+	for (auto& mapEntry : sMap)
+	{
+		if (mapEntry.second.getSubject() == sub) // how does this work with a conjoined key
+			cout << mapEntry.second.getSubject() << endl;
+	}
+
+}
+
+void schedule::findSubandCat(string sub, int cat)
+{
+	for (auto& mapEntry : sMap)
+	{
+		if (mapEntry.second.getSubject() == sub || mapEntry.second.getCatalog() == cat)
+			cout << mapEntry.second.getSubject() << mapEntry.second.getCatalog() << endl;
+	}
+}
+
+void schedule::findIns(string ins)
+{
+	for (auto& mapEntry : sMap)
+	{
+		if (mapEntry.second.getInstructor() == ins)
+			cout << mapEntry.second.getInstructor() << endl;
+	}
 }

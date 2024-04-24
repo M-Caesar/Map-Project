@@ -1,6 +1,10 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <map>
+#include <iterator>
+#include <utility>
+#include <fstream>
 using namespace std;
 class scheduleItem
 {
@@ -14,6 +18,7 @@ private:
 	int totEnrl;
 	int capEnrl;
 	string instructor;
+	string key = subject + to_string(catalog) + section;
 public:
 	scheduleItem()
 	{
@@ -25,9 +30,9 @@ public:
 		int units = 0;
 		int totEnrl = 0;
 		int capEnrl = 0;
-		string instructor = ""
+		string instructor = "";
 	}
-	/*scheduleItem(string sub, int cat, string sec , string com, string ses,
+	scheduleItem(string sub, int cat, string sec , string com, string ses,
 		int uni, int totE, int capE, string inst)
 	{
 		subject = sub;
@@ -39,7 +44,7 @@ public:
 		totEnrl = totE;
 		capEnrl = capE;
 		instructor = inst;
-	}*/
+	}
 	string getSubject();
 	int getCatalog();
 	string getSection();
@@ -50,9 +55,9 @@ public:
 	int getCapEnrl();
 	string getInstructor();
 
-	bool operator==(scheduleItem);
-	bool operator!=(scheduleItem);
-	bool operator>=(scheduleItem);
+	bool operator==(string);
+	bool operator!=(string);
+	bool operator>=(string);
 
 	void print();
 };
@@ -60,6 +65,14 @@ public:
 class schedule
 {
 private:
+	map<string, scheduleItem> sMap;
 public:
+	void initSchedule(ifstream& datafile);
+	void addEntry(scheduleItem);
+	void print();
+	void printHeader();
+	void findSubject(string);
+	void findSubandCat(string, int);
+	void findIns(string);
 };
 
