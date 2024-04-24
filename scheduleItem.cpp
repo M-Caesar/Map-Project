@@ -82,6 +82,9 @@ void schedule::initSchedule(ifstream& datafile)
 	while (getline(datafile, input))
 	{
 		//getline(datafile, subject);
+		for (int i = 0; i < 8; i++)
+			datafile.ignore();
+
 		datafile >> subject >> catalog >> section >> session >> units >> totEnrl >> capEnrl >> instructor;
 
 		scheduleItem newItem(subject, catalog, section, component, session, units, totEnrl, capEnrl, instructor);
@@ -97,12 +100,16 @@ void schedule::addEntry(scheduleItem addItem)
 
 void schedule::print()
 {
-
+	for (auto& mapEntry : sMap)
+	{
+		mapEntry.second.print();
+	}
 }
 
 void schedule::printHeader()
 {
-
+	cout << "Subejct" << " " << "Catalog" << " " << "Section" << " " << "Component" << " "
+		<< "Session" << "Unit" << "TotEnrl" << " " << "CapEnrl" << " " << "Instructor" << endl;
 }
 
 void schedule::findSubject(string sub)
