@@ -14,7 +14,7 @@ int showMenu()
     cout << "Option 2: Find by Subject and Catagory" << endl;
     cout << "Option 3: Find by Instructor" << endl;
     cout << "Option 4: Print all" << endl;
-    cout << "Enter 0 to close the program" << endl;
+    cout << "Enter 5 to close the program" << endl;
     cin >> choice;
     return choice;
 }

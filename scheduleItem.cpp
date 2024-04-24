@@ -66,31 +66,73 @@ bool scheduleItem::operator>=(string item)
 void schedule::initSchedule(ifstream& datafile)
 {
 	string header;
-	string input;
+	//string input;
 	getline(datafile, header);
 
 	string subject;
-	int catalog;
+	string catalog; //int
 	string section;
 	string component;
 	string session;
-	int units;
-	int totEnrl;
-	int capEnrl;
+	string units; //int
+	string totEnrl; //int
+	string capEnrl; //int
 	string instructor;
-
-	while (getline(datafile, input))
+	string instructorLast;
+	string line;
+	string rest;
+	string trash;
+	stringstream ss;
+	//while (getline(datafile, input))
+	//while (!datafile.eof())
+	//for (int i = 0; i < 5; i++) // testing insertion
+	while (getline(datafile, subject,','))
 	{
-		//getline(datafile, subject);
-		//for (int i = 0; i < 8; i++)
-			//datafile.ignore();
-
-		datafile >> subject >> catalog >> section >> session >> units >> totEnrl >> capEnrl >> instructor;
-
-		scheduleItem newItem(subject, catalog, section, component, session, units, totEnrl, capEnrl, instructor);
+		
+		//getline(datafile, subject, ',');
+		getline(datafile, catalog, ',');
+		getline(datafile, section, ',');
+		getline(datafile, trash, ','); //ignore
+		getline(datafile, session, ',');
+		getline(datafile, trash, ','); //ignore
+		getline(datafile, units, ',');
+		getline(datafile, totEnrl, ',');
+		getline(datafile, capEnrl, ',');
+		getline(datafile, trash, ','); //ignore
+		getline(datafile, instructor, ',');
+		getline(datafile, instructorLast, ',');
+		instructor = instructor + "," + instructorLast;
+		scheduleItem newItem(subject, stoi(catalog), section, component, session, stoi(units), stoi(totEnrl), stoi(capEnrl), instructor);
 		addEntry(newItem);
+
+
+
+		//datafile >> subject >> catalog >> section >> session;
+		//datafile.ignore();
+		//datafile >> units >> totEnrl >> capEnrl;
+		datafile.ignore();
+		getline(datafile, trash);
+		//datafile >> instructor;
+		//getline(datafile, rest, '\n');
 	}
 }
+
+//void schedule::customSplit(string str, char sep)
+//{
+//	vector <string> strings;
+//	int startIndex = 0, endIndex = 0;
+//	for (int i = 0; i < str.size(); i++)
+//	{
+//		if (str[i] == sep || i == str.size())
+//		{
+//			endIndex = i;
+//			string temp;
+//			temp.append(str, startIndex, endIndex - startIndex);
+//			strings.push_back(temp);
+//			startIndex = endIndex + 1;
+//		}
+//	}
+//}
 
 void schedule::addEntry(scheduleItem addItem)
 {
@@ -127,7 +169,7 @@ void schedule::findSubandCat(string sub, int cat)
 	for (auto& mapEntry : sMap)
 	{
 		if (mapEntry.second.getSubject() == sub || mapEntry.second.getCatalog() == cat)
-			cout << mapEntry.second.getSubject() << mapEntry.second.getCatalog() << endl;
+			cout << mapEntry.second.getSubject() << " " << mapEntry.second.getCatalog() << endl;
 	}
 }
 

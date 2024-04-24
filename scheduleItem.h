@@ -5,6 +5,8 @@
 #include <iterator>
 #include <utility>
 #include <fstream>
+#include <sstream>
+#include <vector>
 using namespace std;
 class scheduleItem
 {
@@ -60,6 +62,7 @@ public:
 	bool operator>=(string);
 
 	void print();
+
 };
 
 class schedule
@@ -74,5 +77,6 @@ public:
 	void findSubject(string);
 	void findSubandCat(string, int);
 	void findIns(string);
+	void customSplit(string, char);
 };
 
