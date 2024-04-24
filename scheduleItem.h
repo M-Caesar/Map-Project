@@ -20,6 +20,7 @@ private:
 	int totEnrl;
 	int capEnrl;
 	string instructor;
+	string instructorLast;
 	string key = subject + to_string(catalog) + section;
 public:
 	scheduleItem()
@@ -33,9 +34,10 @@ public:
 		int totEnrl = 0;
 		int capEnrl = 0;
 		string instructor = "";
+		string instructorLast = "";
 	}
 	scheduleItem(string sub, int cat, string sec , string com, string ses,
-		int uni, int totE, int capE, string inst)
+		int uni, int totE, int capE, string inst, string instL)
 	{
 		subject = sub;
 		catalog = cat;
@@ -46,6 +48,7 @@ public:
 		totEnrl = totE;
 		capEnrl = capE;
 		instructor = inst;
+		instructorLast = instL;
 	}
 	string getSubject();
 	int getCatalog();
@@ -56,6 +59,7 @@ public:
 	int getTotEnrl();
 	int getCapEnrl();
 	string getInstructor();
+	string getInstructorLast();
 
 	bool operator==(string);
 	bool operator!=(string);
@@ -77,6 +81,5 @@ public:
 	void findSubject(string);
 	void findSubandCat(string, int);
 	void findIns(string);
-	void customSplit(string, char);
 };
 

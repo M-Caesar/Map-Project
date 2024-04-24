@@ -11,7 +11,7 @@ int showMenu()
     cout << "Please enter a choice" << endl;
     //put in options
     cout << "Option 1: Find by Subject" << endl;
-    cout << "Option 2: Find by Subject and Catagory" << endl;
+    cout << "Option 2: Find by Subject and Catalog number" << endl;
     cout << "Option 3: Find by Instructor" << endl;
     cout << "Option 4: Print all" << endl;
     cout << "Enter 5 to close the program" << endl;
@@ -23,7 +23,7 @@ int main()
 {
     //std::cout << "Hello World!\n";
     ifstream inFile;
-    //cout << "Please enter the file to open" << endl;
+    cout << "Please enter the file to open: " << endl;
     string entry;
     cin >> entry;
     //inFile.open(entry);
@@ -48,18 +48,20 @@ int main()
         case 1:
             //string subject;
             cout << "You have chosen: Find by Subject" << endl;
-            cout << "Enter a Subject" << endl;
+            cout << "Enter a Subject 3 letter code" << endl;
             cin >> subject;
+            myschedule.printHeader();
             myschedule.findSubject(subject);
             break;
         case 2:
             //string subject;
             //int catagory;
             cout << "You have chosen: Find by Subject and Catagory" << endl;
-            cout << "Enter a Subject" << endl;
+            cout << "Enter a Subject 3 letter code" << endl;
             cin >> subject;
-            cout << "Enter a catagory" << endl;
+            cout << "Enter a Catalog number" << endl;
             cin >> catagory;
+            myschedule.printHeader();
             myschedule.findSubandCat(subject, catagory);
             break;
         case 3:
@@ -67,7 +69,9 @@ int main()
             // string instructor;
             cout << "You have chosen: Find by Instructor" << endl;
             cout << "Enter an Instructor" << endl;
+            //getline(cin, instructor);
             cin >> instructor;
+            myschedule.printHeader();
             myschedule.findIns(instructor);
             break;
 
@@ -83,14 +87,3 @@ int main()
         }
     } while (chosen != 5);
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

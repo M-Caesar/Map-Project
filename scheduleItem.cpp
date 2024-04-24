@@ -42,11 +42,16 @@ string scheduleItem::getInstructor()
 	return instructor;
 }
 
+string scheduleItem::getInstructorLast()
+{
+	return instructorLast;
+}
+
 //check formatting later
 void scheduleItem::print()
 {
-	cout << subject << catalog << section << component <<
-		session << units << totEnrl << capEnrl << instructor << endl;
+	cout << subject << " " << catalog << " " << section << " " << component << " " <<
+		session << " " << units << " " << totEnrl << " " << capEnrl << " " << instructor + "," + instructorLast << endl;
 }
 
 //will implement operator overloads later
@@ -98,11 +103,11 @@ void schedule::initSchedule(ifstream& datafile)
 		getline(datafile, units, ',');
 		getline(datafile, totEnrl, ',');
 		getline(datafile, capEnrl, ',');
-		getline(datafile, trash, ','); //ignore
+		getline(datafile, trash, '"'); //ignore
 		getline(datafile, instructor, ',');
-		getline(datafile, instructorLast, ',');
-		instructor = instructor + "," + instructorLast;
-		scheduleItem newItem(subject, stoi(catalog), section, component, session, stoi(units), stoi(totEnrl), stoi(capEnrl), instructor);
+		getline(datafile, instructorLast, '"');
+		//instructor = instructor + "," + instructorLast;
+		scheduleItem newItem(subject, stoi(catalog), section, component, session, stoi(units), stoi(totEnrl), stoi(capEnrl), instructor, instructorLast);
 		addEntry(newItem);
 
 
@@ -110,29 +115,12 @@ void schedule::initSchedule(ifstream& datafile)
 		//datafile >> subject >> catalog >> section >> session;
 		//datafile.ignore();
 		//datafile >> units >> totEnrl >> capEnrl;
-		datafile.ignore();
+		//datafile.ignore();
 		getline(datafile, trash);
 		//datafile >> instructor;
 		//getline(datafile, rest, '\n');
 	}
 }
-
-//void schedule::customSplit(string str, char sep)
-//{
-//	vector <string> strings;
-//	int startIndex = 0, endIndex = 0;
-//	for (int i = 0; i < str.size(); i++)
-//	{
-//		if (str[i] == sep || i == str.size())
-//		{
-//			endIndex = i;
-//			string temp;
-//			temp.append(str, startIndex, endIndex - startIndex);
-//			strings.push_back(temp);
-//			startIndex = endIndex + 1;
-//		}
-//	}
-//}
 
 void schedule::addEntry(scheduleItem addItem)
 {
@@ -151,7 +139,7 @@ void schedule::print()
 void schedule::printHeader()
 {
 	cout << "Subejct" << " " << "Catalog" << " " << "Section" << " " << "Component" << " "
-		<< "Session" << "Unit" << "TotEnrl" << " " << "CapEnrl" << " " << "Instructor" << endl;
+		<< "Session" << " " << "Unit" << " " << "TotEnrl" << " " << "CapEnrl" << " " << "Instructor" << endl;
 }
 
 void schedule::findSubject(string sub)
@@ -159,7 +147,8 @@ void schedule::findSubject(string sub)
 	for (auto& mapEntry : sMap)
 	{
 		if (mapEntry.second.getSubject() == sub) // how does this work with a conjoined key
-			cout << mapEntry.second.getSubject() << endl;
+			mapEntry.second.print();
+			//cout << mapEntry.second.getSubject() << endl;
 	}
 
 }
@@ -168,8 +157,9 @@ void schedule::findSubandCat(string sub, int cat)
 {
 	for (auto& mapEntry : sMap)
 	{
-		if (mapEntry.second.getSubject() == sub || mapEntry.second.getCatalog() == cat)
-			cout << mapEntry.second.getSubject() << " " << mapEntry.second.getCatalog() << endl;
+		if (mapEntry.second.getSubject() == sub && mapEntry.second.getCatalog() == cat)
+			mapEntry.second.print();
+			//cout << mapEntry.second.getSubject() << " " << mapEntry.second.getCatalog() << endl;
 	}
 }
 
@@ -177,7 +167,8 @@ void schedule::findIns(string ins)
 {
 	for (auto& mapEntry : sMap)
 	{
-		if (mapEntry.second.getInstructor() == ins)
-			cout << mapEntry.second.getInstructor() << endl;
+		if (mapEntry.second.getInstructor() == ins || mapEntry.second.getInstructorLast() == ins)
+			mapEntry.second.print();
+			//cout << mapEntry.second.getInstructor() << endl;
 	}
 }
