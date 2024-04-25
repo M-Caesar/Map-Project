@@ -26,8 +26,8 @@ int main()
     cout << "Please enter the file to open: " << endl;
     string entry;
     cin >> entry;
-    //inFile.open(entry);
-    inFile.open("STEM - Summer 2022 Schedule of Classes as of 05-02-22(1).csv");
+    inFile.open(entry);
+    //inFile.open("STEM - Summer 2022 Schedule of Classes as of 05-02-22(1).csv");
     if (!inFile.is_open())
     {
         std::cerr << "Error: Unable to open file " << endl;

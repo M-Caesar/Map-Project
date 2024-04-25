@@ -84,17 +84,10 @@ void schedule::initSchedule(ifstream& datafile)
 	string capEnrl; //int
 	string instructor;
 	string instructorLast;
-	string line;
-	string rest;
 	string trash;
-	stringstream ss;
-	//while (getline(datafile, input))
-	//while (!datafile.eof())
-	//for (int i = 0; i < 5; i++) // testing insertion
+
 	while (getline(datafile, subject,','))
 	{
-		
-		//getline(datafile, subject, ',');
 		getline(datafile, catalog, ',');
 		getline(datafile, section, ',');
 		getline(datafile, trash, ','); //ignore
@@ -106,19 +99,11 @@ void schedule::initSchedule(ifstream& datafile)
 		getline(datafile, trash, '"'); //ignore
 		getline(datafile, instructor, ',');
 		getline(datafile, instructorLast, '"');
-		//instructor = instructor + "," + instructorLast;
 		scheduleItem newItem(subject, stoi(catalog), section, component, session, stoi(units), stoi(totEnrl), stoi(capEnrl), instructor, instructorLast);
 		addEntry(newItem);
 
-
-
-		//datafile >> subject >> catalog >> section >> session;
-		//datafile.ignore();
-		//datafile >> units >> totEnrl >> capEnrl;
-		//datafile.ignore();
 		getline(datafile, trash);
-		//datafile >> instructor;
-		//getline(datafile, rest, '\n');
+
 	}
 }
 
@@ -146,7 +131,7 @@ void schedule::findSubject(string sub)
 {
 	for (auto& mapEntry : sMap)
 	{
-		if (mapEntry.second.getSubject() == sub) // how does this work with a conjoined key
+		if (mapEntry.second.getSubject() == sub) 
 			mapEntry.second.print();
 			//cout << mapEntry.second.getSubject() << endl;
 	}
