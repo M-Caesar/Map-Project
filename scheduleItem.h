@@ -90,7 +90,7 @@ public:
 	//Postcondition: provides an not operator for the scheduleItems class
 	bool operator!=(string);
 	//Precondition: none
-	//Postcondition: provides an greater than or equal to operator for the scheduleItems class
+	//Postcondition: provides a greater than or equal to operator for the scheduleItems class
 	bool operator>=(string);
 	
 	//Precondition: private variables all have been initialized
@@ -105,8 +105,8 @@ private:
 	//map created for storing scheduleItems
 	map<string, scheduleItem> sMap;
 public:
-	//Precondition: A data file to be read has been opened and provided to the user
-	//Postcondition: The sMap has been initialized with he scheduleItems 
+	//Precondition: A data file to be read has been opened and provided by the user
+	//Postcondition: The sMap has been initialized with the scheduleItems 
 	void initSchedule(ifstream& datafile);
 	//Preconditions: initSchedule has been called and passes a scheduleItem item to this function
 	//Postcondition: the item has been added to sMap

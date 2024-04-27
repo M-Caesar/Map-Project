@@ -90,7 +90,7 @@ void schedule::initSchedule(ifstream& datafile)
 	{
 		getline(datafile, catalog, ',');
 		getline(datafile, section, ',');
-		getline(datafile, trash, ','); //ignore
+		getline(datafile, component, ','); //ignore
 		getline(datafile, session, ',');
 		getline(datafile, trash, ','); //ignore
 		getline(datafile, units, ',');

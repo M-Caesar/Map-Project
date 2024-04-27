@@ -8,7 +8,7 @@ int showMenu()
 {
     int choice;
     cout << "-----------Main Menu-------------" << endl;
-    cout << "Please enter a choice" << endl;
+    cout << "Please enter a choice number" << endl;
     //put in options
     cout << "Option 1: Find by Subject" << endl;
     cout << "Option 2: Find by Subject and Catalog number" << endl;
@@ -68,7 +68,7 @@ int main()
             //
             // string instructor;
             cout << "You have chosen: Find by Instructor" << endl;
-            cout << "Enter an Instructor" << endl;
+            cout << "Enter an Instructor last name" << endl;
             //getline(cin, instructor);
             cin >> instructor;
             myschedule.printHeader();
