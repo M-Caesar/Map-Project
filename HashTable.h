@@ -142,8 +142,7 @@ public:
     // Provide the code for this function
     //-----------------------------------
     //Load factor = number of entries/size of table
-    loadFactor = size / table.size();
-
+    loadFactor = size / buckets;
     return loadFactor;
   }
 
@@ -151,14 +150,103 @@ public:
   int countCollisions() const {
     int collisionCount = 0;
     // Provide the code for this function
+
+    for (auto& chain : table)
+    {
+        if (!chain.empty())
+        {
+            collisionCount += chain.size() - 1;
+            std::cout << "This is the current number of collisions: " << collisionCount << std::endl;
+        }
+    }
     return collisionCount;
+
   }
 
   // Finds and returns the size of the bucket with the longest chain
   int maxBucketSize() const {
     int largestBucket = 0;
     // Provide the code for this function 
+    for (auto& chain : table)
+    {
+        largestBucket = std::max(largestBucket, static_cast<int>(chain.size()));
+    }
+
     return largestBucket;
   }
 
+  void findSubject(const std::string& sub)
+  {
+      //std::vector<std::pair<K, V>> matchingItem;
+      //for (const auto& chain : table)
+      //{
+      //    for (const auto& pair : chain)
+      //    {
+      //        if (pair.second.getSubject() == sub)
+      //        {
+      //            matchingItem.push_back(pair);
+      //        }
+      //    }
+      //}
+      //return matchingItem;
+      for (size_t i = 0; i < table.size(); i++) {
+          std::cout << "Bucket " << i << ": ";
+          for ( auto& pair : table[i]) {
+              if (pair.second.getSubject() == sub)
+                  pair.second.print();
+                //std::cout << "(" << pair.second.print() << ") ";
+          }
+          std::cout << std::endl;
+      }
+  }
+
+  void findSubandCat(const std::string& sub, int cat)
+  {
+      /*std::vector<std::pair<K, V>> matchingItems;
+      for (const auto& chain : table)
+      {
+          for (const auto& pair : chain)
+          {
+              if (pair.second.getSubject() == sub && pair.second.getCatalog() == cat)
+              {
+                  matchingItems.push_back(pair);
+              }
+          }
+      }
+      return matchingItems;*/
+
+      for (size_t i = 0; i < table.size(); i++) {
+          std::cout << "Bucket " << i << ": ";
+          for ( auto& pair : table[i]) {
+              if (pair.second.getSubject() == sub && pair.second.getCatalog() == cat)
+                  pair.second.print();
+          }
+          std::cout << std::endl;
+      }
+  }
+
+  void findIns(const std::string& ins)
+  {
+     /* std::vector<std::pair<K, V>> matchingItems;
+      for (const auto& chain : table)
+      {
+          for (const auto& pair : chain)
+          {
+              if (pair.second.getInstructor() == ins)
+              {
+                  matchingItems.push_back(pair);
+              }
+          }
+      }
+      return matchingItems;*/
+
+      for (size_t i = 0; i < table.size(); i++) {
+          std::cout << "Bucket " << i << ": ";
+          for (auto& pair : table[i]) {
+              if (pair.second.getInstructor() == ins || pair.second.getInstructorLast() == ins)
+                  pair.second.print();
+          }
+          std::cout << std::endl;
+      }
+  }
 };

@@ -14,7 +14,8 @@ int showMenu()
     cout << "Option 2: Find by Subject and Catalog number" << endl;
     cout << "Option 3: Find by Instructor" << endl;
     cout << "Option 4: Print all" << endl;
-    cout << "Enter 5 to close the program" << endl;
+    cout << "Option 5: Statistics" << endl;
+    cout << "Enter 6 to close the program" << endl;
     cin >> choice;
     return choice;
 }
@@ -26,8 +27,8 @@ int main()
     cout << "Please enter the file to open: " << endl;
     string entry;
     cin >> entry;
-    inFile.open(entry);
-    //inFile.open("STEM - Summer 2022 Schedule of Classes as of 05-02-22(1).csv");
+    //inFile.open(entry);
+    inFile.open("STEM - Summer 2022 Schedule of Classes as of 05-02-22(1).csv");
     if (!inFile.is_open())
     {
         std::cerr << "Error: Unable to open file " << endl;
@@ -81,9 +82,13 @@ int main()
             myschedule.print();
             break;
         case 5:
+            cout << "Printing Statistics" << endl;
+            myschedule.statistics();
+            break;
+        case 6:
             break;
         default:
             cout << "Error: inproper choice" << endl;
         }
-    } while (chosen != 5);
+    } while (chosen != 6);
 }

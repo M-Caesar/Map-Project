@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include "HashTable.h"
 using namespace std;
 class scheduleItem
 {
@@ -104,6 +105,7 @@ class schedule
 private:
 	//map created for storing scheduleItems
 	map<string, scheduleItem> sMap;
+	HashTable<string, scheduleItem> hMap;
 public:
 	//Precondition: A data file to be read has been opened and provided by the user
 	//Postcondition: The sMap has been initialized with the scheduleItems 
@@ -126,5 +128,18 @@ public:
 	//Precondition: Map has been initalized
 	//Postcondition: returns all map entries that have the listed instructor
 	void findIns(string);
+
+	//Precondition: Receives a ponter to a user defined hash function
+	//Postcondition: Sets the hash function in HashTable.h to the user defined
+	//function
+	void setHashFunction(std::function<size_t(const std::string&)> hashFunc);
+
+	/*Postcondition: Displays the size of the hash table
+	* the number of buckets in the hash table
+	* the load factor of the hash table,
+	* the number of collisions,
+	* and the length of the longest chain*/
+	void statistics();
+
 };
 

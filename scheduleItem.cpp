@@ -110,15 +110,17 @@ void schedule::initSchedule(ifstream& datafile)
 void schedule::addEntry(scheduleItem addItem)
 {
 	string key = addItem.getSubject() + "_" + to_string(addItem.getCatalog()) + "_" + addItem.getSection();
-	sMap.insert(pair<string,scheduleItem>(key,addItem));
+	//sMap.insert(pair<string,scheduleItem>(key,addItem));
+	hMap.insert(key, addItem);
 }
 
 void schedule::print()
 {
-	for (auto& mapEntry : sMap)
+	/*for (auto& mapEntry : sMap)
 	{
 		mapEntry.second.print();
-	}
+	}*/
+	hMap.display();
 }
 
 void schedule::printHeader()
@@ -129,31 +131,64 @@ void schedule::printHeader()
 
 void schedule::findSubject(string sub)
 {
-	for (auto& mapEntry : sMap)
-	{
-		if (mapEntry.second.getSubject() == sub) 
-			mapEntry.second.print();
-			//cout << mapEntry.second.getSubject() << endl;
-	}
-
+	//for (auto& mapEntry : sMap)
+	//{
+	//	if (mapEntry.second.getSubject() == sub) 
+	//		mapEntry.second.print();
+	//		//cout << mapEntry.second.getSubject() << endl;
+	//}
+	hMap.findSubject(sub);
 }
+
+
 
 void schedule::findSubandCat(string sub, int cat)
 {
-	for (auto& mapEntry : sMap)
-	{
-		if (mapEntry.second.getSubject() == sub && mapEntry.second.getCatalog() == cat)
-			mapEntry.second.print();
-			//cout << mapEntry.second.getSubject() << " " << mapEntry.second.getCatalog() << endl;
-	}
+	//for (auto& mapEntry : sMap)
+	//{
+	//	if (mapEntry.second.getSubject() == sub && mapEntry.second.getCatalog() == cat)
+	//		mapEntry.second.print();
+	//		//cout << mapEntry.second.getSubject() << " " << mapEntry.second.getCatalog() << endl;
+	//}
+	hMap.findSubandCat(sub, cat);
 }
 
 void schedule::findIns(string ins)
 {
-	for (auto& mapEntry : sMap)
-	{
-		if (mapEntry.second.getInstructor() == ins || mapEntry.second.getInstructorLast() == ins)
-			mapEntry.second.print();
-			//cout << mapEntry.second.getInstructor() << endl;
+	//for (auto& mapEntry : sMap)
+	//{
+	//	if (mapEntry.second.getInstructor() == ins || mapEntry.second.getInstructorLast() == ins)
+	//		mapEntry.second.print();
+	//		//cout << mapEntry.second.getInstructor() << endl;
+	//}
+
+	/*for (size_t i = 0; i < hMap.size(); i++) {
+		std::cout << "Bucket " << i << ": ";
+		for (const auto& pair : table[i]) {
+			std::cout << "(" << pair.first << ") ";
+		}
+		std::cout << std::endl;
 	}
+
+	for (size_t i = 0; i < hMap.getSize(); i++)
+	{
+		for (auto& pair : hMap.getByIndex(i))
+		{
+			if (ins == hMap.)
+		}
+	}*/
+	hMap.findIns(ins);
+}
+
+void schedule::setHashFunction(std::function<size_t(const std::string&)> hashFunc)
+{
+	hMap.setHashFunction(hashFunc);
+}
+
+void schedule::statistics()
+{
+	cout << "This is the size" << " " << hMap.getSize() << endl;;
+	cout << "This is the number of buckets" << " " << hMap.getBuckets() << endl;
+	cout << "These are the number of collisions" << " " << hMap.countCollisions() << endl;
+	cout << "These are the max number of buckets" << " " << hMap.maxBucketSize() << endl;
 }
