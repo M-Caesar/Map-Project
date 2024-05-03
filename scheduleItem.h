@@ -140,6 +140,5 @@ public:
 	* the number of collisions,
 	* and the length of the longest chain*/
 	void statistics();
-
 };
 

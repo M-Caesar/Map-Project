@@ -41,6 +41,7 @@ int main()
     int catagory;
     string instructor;
     myschedule.initSchedule(inFile);
+
     do {
     chosen = showMenu();
 

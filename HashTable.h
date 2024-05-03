@@ -142,7 +142,7 @@ public:
     // Provide the code for this function
     //-----------------------------------
     //Load factor = number of entries/size of table
-    loadFactor = size / buckets;
+    loadFactor = size / table.size();
     return loadFactor;
   }
 
@@ -153,13 +153,15 @@ public:
 
     for (auto& chain : table)
     {
-        if (!chain.empty())
+        if (chain.size() > 1)
         {
             collisionCount += chain.size() - 1;
             std::cout << "This is the current number of collisions: " << collisionCount << std::endl;
+            std::cout << "This is the current chain length " << chain.size() << std::endl;
         }
     }
     return collisionCount;
+
 
   }
 

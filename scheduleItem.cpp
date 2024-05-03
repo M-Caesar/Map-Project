@@ -191,4 +191,6 @@ void schedule::statistics()
 	cout << "This is the number of buckets" << " " << hMap.getBuckets() << endl;
 	cout << "These are the number of collisions" << " " << hMap.countCollisions() << endl;
 	cout << "These are the max number of buckets" << " " << hMap.maxBucketSize() << endl;
+	cout << "This is the load factor " << " " << hMap.getLoadFactor() << endl;
 }
+
