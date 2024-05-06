@@ -28,7 +28,7 @@ private:
 
 public:
   // Constructor
-  HashTable(size_t initialSize = 10,
+  HashTable(size_t initialSize = 179,
             std::function<size_t(const K &)> hashFunc = std::hash<K>{})
       : size(0), hashFunction(hashFunc) {
     table.resize(initialSize);
@@ -142,13 +142,14 @@ public:
     // Provide the code for this function
     //-----------------------------------
     //Load factor = number of entries/size of table
-    loadFactor = size / table.size();
+    loadFactor = static_cast<double>(size) / table.size();
     return loadFactor;
   }
 
   // Calculates and returns the number collisions 
   int countCollisions() const {
     int collisionCount = 0;
+    int count = 0;
     // Provide the code for this function
 
     for (auto& chain : table)
@@ -157,8 +158,10 @@ public:
         {
             collisionCount += chain.size() - 1;
             std::cout << "This is the current number of collisions: " << collisionCount << std::endl;
+            std::cout << "Bucket number: " << count << std::endl;
             std::cout << "This is the current chain length " << chain.size() << std::endl;
         }
+        count++;
     }
     return collisionCount;
 
@@ -192,13 +195,13 @@ public:
       //}
       //return matchingItem;
       for (size_t i = 0; i < table.size(); i++) {
-          std::cout << "Bucket " << i << ": ";
+          //std::cout << "Bucket " << i << ": ";
           for ( auto& pair : table[i]) {
               if (pair.second.getSubject() == sub)
                   pair.second.print();
                 //std::cout << "(" << pair.second.print() << ") ";
           }
-          std::cout << std::endl;
+          //std::cout << std::endl;
       }
   }
 
@@ -251,4 +254,5 @@ public:
           std::cout << std::endl;
       }
   }
+
 };

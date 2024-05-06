@@ -20,6 +20,16 @@ int showMenu()
     return choice;
 }
 
+size_t getHashVal(string key)
+{
+    size_t hashval = 0;
+
+    for (auto ch : key)
+        hashval += ch;
+
+    return hashval;
+}
+
 int main()
 {
     //std::cout << "Hello World!\n";
@@ -40,6 +50,7 @@ int main()
     string subject;
     int catagory;
     string instructor;
+    myschedule.setHashFunction(getHashVal);
     myschedule.initSchedule(inFile);
 
     do {
