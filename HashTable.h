@@ -221,12 +221,12 @@ public:
       return matchingItems;*/
 
       for (size_t i = 0; i < table.size(); i++) {
-          std::cout << "Bucket " << i << ": ";
+          //std::cout << "Bucket " << i << ": ";
           for ( auto& pair : table[i]) {
               if (pair.second.getSubject() == sub && pair.second.getCatalog() == cat)
                   pair.second.print();
           }
-          std::cout << std::endl;
+          //std::cout << std::endl;
       }
   }
 
@@ -246,12 +246,12 @@ public:
       return matchingItems;*/
 
       for (size_t i = 0; i < table.size(); i++) {
-          std::cout << "Bucket " << i << ": ";
+          //std::cout << "Bucket " << i << ": ";
           for (auto& pair : table[i]) {
               if (pair.second.getInstructor() == ins || pair.second.getInstructorLast() == ins)
                   pair.second.print();
           }
-          std::cout << std::endl;
+          //std::cout << std::endl;
       }
   }
 
