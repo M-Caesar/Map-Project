@@ -157,9 +157,9 @@ public:
         if (chain.size() > 1)
         {
             collisionCount += chain.size() - 1;
-            std::cout << "This is the current number of collisions: " << collisionCount << std::endl;
-            std::cout << "Bucket number: " << count << std::endl;
-            std::cout << "This is the current chain length " << chain.size() << std::endl;
+            //std::cout << "This is the current number of collisions: " << collisionCount << std::endl;
+            //std::cout << "Bucket number: " << count << std::endl;
+            //std::cout << "This is the current chain length " << chain.size() << std::endl;
         }
         count++;
     }

@@ -24,8 +24,12 @@ size_t getHashVal(string key)
 {
     size_t hashval = 0;
 
-    for (auto ch : key)
-        hashval += ch;
+   // for (auto ch : key)
+        //hashval += ch;
+
+    //hashval = key[0] + 27 * key[1] + 729 * key[2];
+    for (char ch : key)
+        hashval = (((32) * hashval) + (30*key[1]^4)*ch);
 
     return hashval;
 }
@@ -37,8 +41,8 @@ int main()
     cout << "Please enter the file to open: " << endl;
     string entry;
     cin >> entry;
-    //inFile.open(entry);
-    inFile.open("STEM - Summer 2022 Schedule of Classes as of 05-02-22(1).csv");
+    inFile.open(entry);
+    //inFile.open("STEM - Summer 2022 Schedule of Classes as of 05-02-22(1).csv");
     if (!inFile.is_open())
     {
         std::cerr << "Error: Unable to open file " << endl;
